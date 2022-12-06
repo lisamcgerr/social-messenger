@@ -1,10 +1,11 @@
 import React from 'react';
 import '../style/Sidebar.css';
-import { Avatar, Icon, IconButton } from '@material-ui/core';
+import { Avatar, IconButton } from '@material-ui/core';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { SearchOutlined } from '@material-ui/icons';
+import SidebarChat from './SidebarChat';
 
 const Sidebar = () => {
   return (
@@ -30,7 +31,10 @@ const Sidebar = () => {
             </div>
         </div>
         <div className="sidebar__chats">
-            {/* @TODO  */}
+            <SidebarChat addNewChat />
+            <SidebarChat />
+            <SidebarChat />
+            <SidebarChat />
         </div>
     </div>
   )
