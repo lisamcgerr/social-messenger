@@ -4,14 +4,23 @@ import { Avatar, IconButton } from '@material-ui/core';
 import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
+import MicIcon from '@material-ui/icons/Mic';
 
 const Chat = () => {
+    const [input, setInput] = useState('');
     const [seed, setSeed] = useState('');
     const random = Math.floor(Math.random() * 1000);
 
     useEffect(() => {
         setSeed(random);
     }, []);
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        console.log('Input Variable: ', input);
+        // @TODO
+    };
 
     return (
         <div className="chat">
@@ -36,7 +45,7 @@ const Chat = () => {
             </div>
             <div className="chat__body">
                 {/* @TODO chat receiver logic*/}
-                <p className="chat__message chat__receiver">
+                <p className={`chat__message ${true && "chat__receiver"}`}>
                     <span className="chat__name">@TODO Chatter Name</span>
                     @TODO Chat Message here
                     <span className="chat__timestamp">@TODO time</span>
@@ -48,6 +57,12 @@ const Chat = () => {
                 </p>
             </div>
             <div className="chat__footer">
+                <InsertEmoticonIcon />
+                <form>
+                    <input value={input} onChange={e => setInput(e.target.value)} type="text" placeholder="Type a message" />
+                    <button type="submit" onClick={sendMessage} >Send</button>
+                </form>
+                <MicIcon />
             </div>
         </div>
     )
