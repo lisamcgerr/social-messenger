@@ -19,6 +19,7 @@ const Chat = () => {
     const sendMessage = (e) => {
         e.preventDefault();
         console.log('Input Variable: ', input);
+        setInput('');
         // @TODO
     };
 

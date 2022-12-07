@@ -1,3 +1,5 @@
+import firebase from 'firebase';
+
 const firebaseConfig = {
     apiKey: "AIzaSyClXRHPJI4tFGD5C-PvtXwthdOPr-svTQY",
     authDomain: "social-messenger-4ac0c.firebaseapp.com",
@@ -6,5 +8,10 @@ const firebaseConfig = {
     messagingSenderId: "1041589060789",
     appId: "1:1041589060789:web:d01d092cd0dc13bb3f2afc"
 };
+// @TODO - missing measurementId
 
-//@TODO - missing measurementId
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+export const auth = firebase.auth(); // authentication
+export const provider = new firebase.auth.GoogleAuthProvider(); // Google authentication
+export default db;
