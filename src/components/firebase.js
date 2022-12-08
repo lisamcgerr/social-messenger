@@ -1,4 +1,6 @@
-import firebase from 'firebase';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyClXRHPJI4tFGD5C-PvtXwthdOPr-svTQY",
@@ -8,10 +10,9 @@ const firebaseConfig = {
     messagingSenderId: "1041589060789",
     appId: "1:1041589060789:web:d01d092cd0dc13bb3f2afc"
 };
-// @TODO - missing measurementId
 
-const firebaseApp = firebase.initializeApp(firebaseConfig);
-const db = firebaseApp.firestore();
-export const auth = firebase.auth(); // authentication
-export const provider = new firebase.auth.GoogleAuthProvider(); // Google authentication
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+export const auth = getAuth(app); // authentication
+export const provider = new GoogleAuthProvider(); // Google authentication
 export default db;
