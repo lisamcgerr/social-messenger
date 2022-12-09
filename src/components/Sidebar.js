@@ -8,6 +8,7 @@ import { SearchOutlined } from '@material-ui/icons';
 import SidebarChat from './SidebarChat';
 import db from './firebase';
 import { collection, getDocs } from 'firebase/firestore';
+import AddNewChat from './AddNewChat';
 
 const Sidebar = () => {
     const [ rooms, setRooms ] = useState([]);
@@ -48,9 +49,11 @@ const Sidebar = () => {
                 </div>
             </div>
             <div className="sidebar__chats">
+                <AddNewChat />
                 {rooms.map(room => (
                     <SidebarChat key={room.id} id={room.id} name={room.data.name} />
                 ))}
+                {/* @TODO seperate component */}
             </div>
         </div>
     )
