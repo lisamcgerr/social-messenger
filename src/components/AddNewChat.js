@@ -4,12 +4,11 @@ import db from './firebase';
 import { addDoc, collection } from 'firebase/firestore';
 
 const AddNewChat = () => {
-    const roomsCollection = collection(db, 'rooms');
-    // @TODO Render issue
     const createChat = () => {
         const roomName = prompt('Please enter name for chat room');
         if (roomName) {
-            addDoc(roomsCollection, {name: roomName});
+          const roomsCollection = collection(db, 'rooms');
+          addDoc(roomsCollection, {name: roomName});
         }
     };
 

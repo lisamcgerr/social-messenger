@@ -23,7 +23,7 @@ const Sidebar = () => {
             })))
         }
         fetchRooms();
-    }, [])
+    }, [roomsCollection])
 
     return (
         <div className="sidebar">
@@ -53,7 +53,6 @@ const Sidebar = () => {
                 {rooms.map(room => (
                     <SidebarChat key={room.id} id={room.id} name={room.data.name} />
                 ))}
-                {/* @TODO seperate component */}
             </div>
         </div>
     )
