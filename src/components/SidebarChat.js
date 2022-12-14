@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import '../style/SidebarChat.css';
 import { Avatar } from '@material-ui/core';
+import { Link } from 'react-router-dom'
 
 const SidebarChat = ({ name, id, addNewChat }) => {
     const [seed, setSeed] = useState('');
     //const [newRoomName, setNewRoomName] = useState('');
-    const random = Math.floor(Math.random() * 1000);
 
     useEffect(() => {
+        const random = Math.floor(Math.random() * 1000);
         setSeed(random);
     }, []);
 
     return (
-        <div className="sidebarChat">
-            <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
-            <div className="sidebarChat__info">
-                <h2>{name}</h2>
-                <p>@TODO Last Message...</p>
+        <Link to={`/rooms/${id}`} >
+            <div className="sidebarChat">
+                <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
+                    <div className="sidebarChat__info">
+                        <h2>{name}</h2>
+                        <p>@TODO Last Message...</p>
+                    </div>
             </div>
-        </div>
+        </Link>
     );
 }
 

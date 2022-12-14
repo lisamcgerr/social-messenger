@@ -7,14 +7,30 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import { useParams } from 'react-router-dom';
+import db from './firebase';
+import { doc, getDoc } from 'firebase/firestore';
 
 const Chat = () => {
     const [input, setInput] = useState('');
     const [seed, setSeed] = useState('');
-    const random = Math.floor(Math.random() * 1000);
     const { roomId } = useParams();
+    const [roomName, setRoomName] = useState('');
+
+    // every time the room changes we are going to get new messages for that room
+    useEffect(() => {
+        const fetchRoom = async (roomId) => {
+            if (roomId) {
+                const docRef = doc(db, 'rooms', roomId);
+                const docSnap = await getDoc(docRef);
+                console.log('docSnap Name: ', docSnap.data().name);
+                setRoomName(docSnap.data().name);
+            };
+        };
+        fetchRoom(roomId);
+    }, [roomId])
 
     useEffect(() => {
+        const random = Math.floor(Math.random() * 1000);
         setSeed(random);
     }, []);
 
@@ -30,7 +46,7 @@ const Chat = () => {
             <div className="chat__header">
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className="chat__headerInfo">
-                    <h3>@TODO Room Name</h3>
+                    <h3>{roomName}</h3>
                     <p>Last seen at...</p>
                 </div>
                 <div className="chat__headerRight">

@@ -1,3 +1,4 @@
+import React from 'react';
 import '../style/App.css';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
@@ -7,21 +8,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div className="app">
-      <div className="app__body">
-        <Router>
-          <Switch>
+    <Router>
+      <Switch>
+        <div className="app">
+          <div className="app__body">
             <Sidebar />
-            <Route exact path="/rooms/:roomId" >
+            <Route path="/rooms/:roomId">
               <Chat />
             </Route>
             <Route exact path="/">
               <Home />
             </Route>
-          </Switch>
-        </Router>
-      </div>
-    </div>
+          </div>
+        </div>
+      </Switch>
+    </Router>
   );
 }
 

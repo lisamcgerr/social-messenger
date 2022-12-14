@@ -23,7 +23,7 @@ const Sidebar = () => {
             })))
         }
         fetchRooms();
-    }, [roomsCollection])
+    })
 
     return (
         <div className="sidebar">

@@ -3,12 +3,13 @@ import { getFirestore } from 'firebase/firestore';
 import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyClXRHPJI4tFGD5C-PvtXwthdOPr-svTQY",
-    authDomain: "social-messenger-4ac0c.firebaseapp.com",
-    projectId: "social-messenger-4ac0c",
-    storageBucket: "social-messenger-4ac0c.appspot.com",
-    messagingSenderId: "1041589060789",
-    appId: "1:1041589060789:web:d01d092cd0dc13bb3f2afc"
+  apiKey: "AIzaSyAmYKhzQE-cxQzEA0gE_UgME17tOoeRLZE",
+  authDomain: "whatsapp-clone-3-ac20c.firebaseapp.com",
+  projectId: "whatsapp-clone-3-ac20c",
+  storageBucket: "whatsapp-clone-3-ac20c.appspot.com",
+  messagingSenderId: "1097974143399",
+  appId: "1:1097974143399:web:7ebcd381f88f1cc2533e82",
+  measurementId: "G-1EFXG5PZRN"
 };
 
 const app = initializeApp(firebaseConfig);
