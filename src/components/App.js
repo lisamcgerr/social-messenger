@@ -14,8 +14,11 @@ const App = () => {
     <Router>
       <Switch>
         <div className="app">
-          {!user ? <Login />
-          : (
+          {!user ?
+          (<Route path="/login">
+            <Login />
+          </Route>
+          ) : (
             <div className="app__body">
               <Sidebar />
               <Route path="/rooms/:roomId">
