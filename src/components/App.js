@@ -5,20 +5,19 @@ import Chat from './Chat';
 import Home from './Home';
 import Login from './Login';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useStateValue } from '../contexts/StateProvider';
 
 
 const App = () => {
-  const [user, setUser] = useState(null  );
+  const [{ user }, dispatch ] = useStateValue();
   
   return (
     <Router>
       <Switch>
         <div className="app">
           {!user ?
-          (<Route path="/login">
-            <Login />
-          </Route>
-          ) : (
+           <Login />
+           : (
             <div className="app__body">
               <Sidebar />
               <Route path="/rooms/:roomId">

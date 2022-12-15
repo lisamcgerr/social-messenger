@@ -9,10 +9,12 @@ import SidebarChat from './SidebarChat';
 import db from './firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import AddNewChat from './AddNewChat';
+import { useStateValue } from '../contexts/StateProvider';
 
 const Sidebar = () => {
     const [ rooms, setRooms ] = useState([]);
     const roomsCollection = collection(db, 'rooms');
+    const [{ user }] = useStateValue();
 
     useEffect(() => {
         const fetchRooms = async () => {
@@ -28,7 +30,7 @@ const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="sidebar__header">
-                <Avatar />
+                <Avatar src={user?.photoURL} alt="Google profile icon"/>
                 <div className="sidebar__headerRight">
                     {/* @TODO seperate component for icons */}
                     <IconButton>

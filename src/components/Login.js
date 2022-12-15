@@ -2,16 +2,23 @@ import React from 'react';
 import '../style/Login.css';
 import { Button } from '@material-ui/core';
 import { auth, googleProvider } from './firebase';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
+import { useStateValue } from '../contexts/StateProvider';
+import { actionTypes } from '../contexts/reducer';
 
 const Login = () => {
+  const [{}, dispatch] = useStateValue();
+
   const signIn = () => {
+    // @TODO persist user after browser refresh
     signInWithPopup(auth, googleProvider)
     .then((result) => {
-      //const credential = GoogleAuthProvider.credentialFromResult(result);
-      console.log('result: ', result);
+      dispatch({
+        type: actionTypes.SET_USER,
+        user: result.user
+      })
     }).catch((error) => {
-      console.log('Custom ERROR: ', error)
+      alert(error.message);
     });
   }
 
