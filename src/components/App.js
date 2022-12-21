@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../style/App.css';
 import Sidebar from './Sidebar';
 import Chat from './Chat';
@@ -10,7 +10,7 @@ import { useStateValue } from '../contexts/StateProvider';
 
 const App = () => {
   const [{ user }, dispatch ] = useStateValue();
-  
+
   return (
     <Router>
       <Switch>

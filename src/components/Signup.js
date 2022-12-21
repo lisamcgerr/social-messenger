@@ -4,29 +4,21 @@ import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
-import { actionTypes } from '../contexts/reducer';
-import { useStateValue } from '../contexts/StateProvider';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [{}, dispatch] = useStateValue();
     const navigate = useHistory();
 
     const signUp = async (e) => {
         e.preventDefault();
-        await createUserWithEmailAndPassword(auth, email, password)
-        .then((result) => {
-            console.log('signup result: ', result); // @TODO delete
-            dispatch({
-                type: actionTypes.SET_USER,
-                user: result.user
-            });
-            navigate.push('/'); // @TODO redirect navigation?
-        }).catch((err) => {
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+            navigate.push('./login')
+        } catch (err) {
             setError(err.message);
-        })
+        }
         setEmail('');
         setPassword('');
     }
