@@ -25,7 +25,7 @@ const Login = () => {
           type: actionTypes.SET_USER,
           user: result.user
       });
-        navigate.push('/'); // @TODO redirect navigation?
+      navigate.push('/'); // @TODO redirect navigation?
     }).catch((err) => {
         setError(err.message);
     })
