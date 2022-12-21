@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../style/SidebarChat.css';
 import { Avatar } from '@material-ui/core';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const SidebarChat = ({ name, id, addNewChat }) => {
     const [seed, setSeed] = useState('');

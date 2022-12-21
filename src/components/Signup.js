@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../style/Signup.css';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './firebase';
@@ -10,19 +10,22 @@ import { useStateValue } from '../contexts/StateProvider';
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const [{}, dispatch] = useStateValue();
+    const navigate = useHistory();
 
     const signUp = async (e) => {
         e.preventDefault();
         await createUserWithEmailAndPassword(auth, email, password)
         .then((result) => {
-            console.log('signup result: ', result); // @tTODO delete
+            console.log('signup result: ', result); // @TODO delete
             dispatch({
                 type: actionTypes.SET_USER,
                 user: result.user
-            })
-        }).catch((error) => {
-            alert(error.message);
+            });
+            navigate.push('/'); // @TODO redirect navigation?
+        }).catch((err) => {
+            setError(err.message);
         })
         setEmail('');
         setPassword('');
@@ -30,7 +33,10 @@ const Signup = () => {
 
   return (
     <div className="signup">
-        <h2>Signup</h2>
+        <h2>Sign Up</h2>
+        <div className="signup__error">
+            <p>{error}</p>
+        </div>
         <form>
             <input
                 type="email"
