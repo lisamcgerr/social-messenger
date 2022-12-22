@@ -18,18 +18,18 @@ const App = () => {
       <Switch>
         <div className="app">
             <div className="app__body">
-\             <Route path="/signup">
+             <Route exact path="/signup">
                 <Signup />
               </Route>
-              <Route path="/login">
+              <Route exact path="/login">
                 <Login />
               </Route>
               <ProtectedRoute user={user} >
                 <Sidebar />
                 <Route>
-                  <Chat path="/rooms/roomId" />
+                  <Chat exact path="/rooms/roomId" />
                 </Route>
-                <Route path="/">
+                <Route exact path="/">
                   <Home />
                 </Route>
               </ProtectedRoute>

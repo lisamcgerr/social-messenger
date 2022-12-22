@@ -1,17 +1,17 @@
 .login {
-    background-color: #f8f8f8;
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    place-items: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
 .login__container {
-    padding: 100px;
+    padding: 15px;
     text-align: center;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 12), 0 1px;
+    justify-content: center;
+    align-items: center;
 }
 
 .login__container > img {
@@ -21,7 +21,12 @@
 }
 
 .login__container > button {
-    margin-top: 50px;
+    margin-top: 10px;
+    text-transform: inherit !important;
+    background-color: #207178 !important;
+    color: white;
+}
+.login__containerInputs > button {
     text-transform: inherit !important;
     background-color: #207178 !important;
     color: white;
@@ -32,3 +37,21 @@
     padding: 5px;
     object-fit: contain;
 }
+
+.login__containerInputs {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.login__containerInputs > input {
+    margin: 10px;
+}
+
+.login__containerSignup {
+    margin: 10px;
+}
+
+/* button styling */
+

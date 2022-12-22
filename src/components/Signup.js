@@ -25,26 +25,32 @@ const Signup = () => {
 
   return (
     <div className="signup">
-        <h2>Sign Up</h2>
-        <div className="signup__error">
+      <div className="signup__container">
+        <img src="https://user-images.githubusercontent.com/73184313/207704192-3bad1fd2-0399-4b5c-a90e-8d4d9ed9dab3.png"
+          alt="social messgenger logo" />
+        <div className="signup__text">
+          <h2>Sign Up</h2>
+        </div>
+        <div className="signup__containerInputs">
+          <div className="signup__error">
             <p>{error}</p>
+          </div>
+          <input
+            type="email"
+            onChange={e => setEmail(e.target.value)}
+            value={email}
+            placeholder="Email Address" />
+          <input
+            type="password"
+            onChange={e => setPassword(e.target.value)}
+            value={password}
+            placeholder="Password" />
+          <Button type="submit" onClick={signUp}>Sign Up</Button>
         </div>
-        <form>
-            <input
-                type="email"
-                onChange={e => setEmail(e.target.value)}
-                value={email}
-                placeholder="Email Address" />
-            <input
-                type="password"
-                onChange={e => setPassword(e.target.value)}
-                value={password}
-                placeholder="Password" />
-            <Button onClick={signUp} type="submit">Sign Up</Button>
-        </form>
-        <div className="signup__button">
-            Already have an account? <Link to="/login">Login</Link>
+        <div className="signup__containerSignup">
+          <p>Already have an account? <Link to="/login">Login</Link></p>
         </div>
+      </div>
     </div>
   )
 }
