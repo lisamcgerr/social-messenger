@@ -8,13 +8,16 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import { useParams } from 'react-router-dom';
 import db from './firebase';
-import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { useStateValue } from '../contexts/StateProvider';
 
 const Chat = () => {
     const [input, setInput] = useState('');
     const [seed, setSeed] = useState('');
     const { roomId } = useParams();
     const [roomName, setRoomName] = useState('');
+    const [messages, setMessages] = useState([]);
+    const [{user}] = useStateValue();
 
     // every time the room changes we are going to get new messages for that room
     useEffect(() => {
@@ -22,13 +25,14 @@ const Chat = () => {
             if (roomId) {
                 const docRef = doc(db, 'rooms', roomId);
                 const docSnap = await getDoc(docRef);
-                console.log('docSnap Name: ', docSnap.data().name);
+                console.log('docSnap Name: ', docSnap.data().name); // @TODO remove
                 setRoomName(docSnap.data().name);
 
                 const docRefRoomMessages = collection(db, 'rooms', roomId, 'messages');
+                //const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc')); @TODO orderBy
                 const docSnapRoomMessages = await getDocs(docRefRoomMessages);
-                console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()})))
-                // setRoomMessages()
+                console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()}))) // @TODO remove
+                setMessages(docSnapRoomMessages.docs.map(doc => doc.data()));
             };
         };
         fetchRoom(roomId);
@@ -68,17 +72,16 @@ const Chat = () => {
                 </div>
             </div>
             <div className="chat__body">
-                {/* @TODO chat receiver logic*/}
-                <p className={`chat__message ${true && "chat__receiver"}`}>
-                    <span className="chat__name">@TODO Chatter Name</span>
-                    @TODO Chat Message here
-                    <span className="chat__timestamp">@TODO time</span>
+                {/* @TODO user.name or user.email - check google login */}
+                {messages.map(message => (
+                    <p className={`chat__message ${user.email !== message.name && "chat__receiver"}`} key={message.id}>
+                    <span className="chat__name">{message.name}</span>
+                    {message.text}
+                    <span className="chat__timestamp">
+                        {new Date(message.timestamp?.toDate()).toUTCString()}
+                    </span>
                 </p>
-                <p className="chat__message">
-                    <span className="chat__name">@TODO Chatter Name</span>
-                    @TODO Chat Message here
-                    <span className="chat__timestamp">@TODO time</span>
-                </p>
+                ))}
             </div>
             <div className="chat__footer">
                 <InsertEmoticonIcon />
