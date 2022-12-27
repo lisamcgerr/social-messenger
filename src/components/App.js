@@ -14,29 +14,28 @@ const App = () => {
   const [{ user }] = useStateValue();
 
   return (
-    <Router>
-      <Switch>
-        <div className="app">
-            <div className="app__body">
-             <Route exact path="/signup">
-                <Signup />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-              <ProtectedRoute user={user} >
+    <div className="app">
+      <Router>
+        <Switch>
+          <div className="app__body">
+          <Route exact path='/signup'>
+              <Signup />
+            </Route>
+            <Route exact path='/login'>
+              <Login />
+            </Route>
+              <Route exact path='/rooms/:roomId'>
                 <Sidebar />
-                <Route>
-                  <Chat exact path="/rooms/roomId" />
-                </Route>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-              </ProtectedRoute>
-            </div>
-        </div>
-      </Switch>
-    </Router>
+                <Chat />
+              </Route>
+              <Route exact path='/'>
+                <Sidebar />
+                <Home />
+              </Route>
+          </div>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
