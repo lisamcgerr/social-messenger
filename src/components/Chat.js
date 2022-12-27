@@ -8,7 +8,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import { useParams } from 'react-router-dom';
 import db from './firebase';
-import { doc, getDoc, collection, getDocs, orderBy, query } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs, addDoc, serverTimestamp, orderBy, query } from 'firebase/firestore';
 import { useStateValue } from '../contexts/StateProvider';
 
 const Chat = () => {
@@ -43,11 +43,15 @@ const Chat = () => {
         setSeed(random);
     }, [roomId]);
 
-    const sendMessage = (e) => {
+    const sendMessage = async (e) => {
         e.preventDefault();
-        console.log('Input Variable: ', input);
+        console.log('Input Variable: ', input); //@TODO remove
+        const docRefAddMessage = await addDoc(collection(db, 'rooms', roomId, 'messages'), {
+            message: input,
+            name: user.email,
+            timestamp: serverTimestamp()
+        });
         setInput('');
-        // @TODO
     };
 
     return (
@@ -56,7 +60,7 @@ const Chat = () => {
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className="chat__headerInfo">
                     <h3>{roomName}</h3>
-                    <p>Last seen at...</p>
+                    <p>{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}</p>
                 </div>
                 <div className="chat__headerRight">
                     {/* @TODO seperate component for icons */}
@@ -72,9 +76,10 @@ const Chat = () => {
                 </div>
             </div>
             <div className="chat__body">
-                {/* @TODO user.name or user.email - check google login */}
+                {/* @TODO user.displayName or user.email - check google login */}
+                {/* @TODO in prod we can use google id */}
                 {messages.map(message => (
-                    <p className={`chat__message ${user.email !== message.name && "chat__receiver"}`} key={message.id}>
+                    <p className={`chat__message ${user.email === message.name && "chat__receiver"}`} key={message.id}>
                     <span className="chat__name">{message.name}</span>
                     {message.text}
                     <span className="chat__timestamp">
