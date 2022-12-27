@@ -4,7 +4,10 @@ import { Redirect } from 'react-router-dom';
 const ProtectedRoute = ({ children, user }) => {
 
     if (!user) {
-        return <Redirect to="/login" />
+        return (
+                <Redirect to="/login" /> ||
+                <Redirect to="/signup" />
+        )
     }
     return children;
 };

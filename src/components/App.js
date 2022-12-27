@@ -24,6 +24,7 @@ const App = () => {
             <Route exact path='/login'>
               <Login />
             </Route>
+            <ProtectedRoute user={user} >
               <Route exact path='/rooms/:roomId'>
                 <Sidebar />
                 <Chat />
@@ -32,6 +33,7 @@ const App = () => {
                 <Sidebar />
                 <Home />
               </Route>
+            </ProtectedRoute>
           </div>
         </Switch>
       </Router>
