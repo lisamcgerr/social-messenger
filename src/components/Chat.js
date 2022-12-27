@@ -8,7 +8,7 @@ import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import MicIcon from '@material-ui/icons/Mic';
 import { useParams } from 'react-router-dom';
 import db from './firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 const Chat = () => {
     const [input, setInput] = useState('');
@@ -24,6 +24,11 @@ const Chat = () => {
                 const docSnap = await getDoc(docRef);
                 console.log('docSnap Name: ', docSnap.data().name);
                 setRoomName(docSnap.data().name);
+
+                const docRefRoomMessages = collection(db, 'rooms', roomId, 'messages');
+                const docSnapRoomMessages = await getDocs(docRefRoomMessages);
+                console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()})))
+                // setRoomMessages()
             };
         };
         fetchRoom(roomId);
@@ -32,7 +37,7 @@ const Chat = () => {
     useEffect(() => {
         const random = Math.floor(Math.random() * 1000);
         setSeed(random);
-    }, []);
+    }, [roomId]);
 
     const sendMessage = (e) => {
         e.preventDefault();
