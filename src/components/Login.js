@@ -20,7 +20,7 @@ const Login = () => {
     e.preventDefault();
     await signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
-      console.log('login result: ', result); // @TODO delete
+      console.log('login result user: ', result.user); // @TODO delete
       dispatch({
           type: actionTypes.SET_USER,
           user: result.user
