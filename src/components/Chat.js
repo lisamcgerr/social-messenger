@@ -45,7 +45,7 @@ const Chat = () => {
     const sendMessage = async (e) => {
         e.preventDefault();
         console.log('Input Variable: ', input); //@TODO remove
-        const docRefAddMessage = await addDoc(collection(db, 'rooms', roomId, 'messages'), {
+        await addDoc(collection(db, 'rooms', roomId, 'messages'), {
             text: input,
             name: user.email,
             timestamp: serverTimestamp()
