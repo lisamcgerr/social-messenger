@@ -43,7 +43,6 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-
 }
 
 .login__containerInputs > input {
@@ -54,5 +53,12 @@
     margin: 10px;
 }
 
-/* button styling */
+.login__error {
+    background-color: #FFCCCB;
+    color: red;
+}
+
+.login__text {
+    padding-bottom: 15px;
+}
 

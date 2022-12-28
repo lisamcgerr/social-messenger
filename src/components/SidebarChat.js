@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 const SidebarChat = ({ name, id, addNewChat }) => {
     const [seed, setSeed] = useState('');
-    //const [newRoomName, setNewRoomName] = useState('');
 
     useEffect(() => {
         const random = Math.floor(Math.random() * 1000);
@@ -22,7 +21,7 @@ const SidebarChat = ({ name, id, addNewChat }) => {
                     </div>
             </div>
         </Link>
-    );
-}
+    )
+};
 
 export default SidebarChat;

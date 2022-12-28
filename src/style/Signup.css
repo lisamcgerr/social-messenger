@@ -48,3 +48,8 @@
 .signup__containerSignup {
     margin: 10px;
 }
+
+.signup__error {
+    background-color: #FFCCCB;
+    color: red;
+}

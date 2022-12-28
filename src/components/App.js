@@ -9,7 +9,6 @@ import Signup from './Signup';
 import ProtectedRoute from './ProtectedRoute';
 import { useStateValue } from '../contexts/StateProvider';
 
-
 const App = () => {
   const [{ user }] = useStateValue();
 
@@ -40,7 +39,7 @@ const App = () => {
       </Switch>
     </Router>
   </>
-  );
-}
+  )
+};
 
 export default App;

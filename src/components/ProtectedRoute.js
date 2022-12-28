@@ -5,8 +5,8 @@ const ProtectedRoute = ({ children, user }) => {
 
     if (!user) {
         return (
-                <Redirect to="/login" /> ||
-                <Redirect to="/signup" />
+            <Redirect to="/login" /> ||
+            <Redirect to="/signup" />
         )
     }
     return children;

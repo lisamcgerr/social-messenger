@@ -12,7 +12,7 @@ import AddNewChat from './AddNewChat';
 import { useStateValue } from '../contexts/StateProvider';
 
 const Sidebar = () => {
-    const [ rooms, setRooms ] = useState([]);
+    const [rooms, setRooms] = useState([]);
     const roomsCollection = collection(db, 'rooms');
     const [{ user }] = useStateValue();
 
@@ -58,6 +58,6 @@ const Sidebar = () => {
             </div>
         </div>
     )
-}
+};
 
 export default Sidebar;

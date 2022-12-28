@@ -19,7 +19,6 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [{user}] = useStateValue();
 
-    // every time the room changes we are going to get new messages for that room
     useEffect(() => {
         const fetchRoom = async (roomId) => {
             if (roomId) {
@@ -60,7 +59,7 @@ const Chat = () => {
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className="chat__headerInfo">
                     <h3>{roomName}</h3>
-                    <p>{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}</p>
+                    <p>last seen{' '}{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}</p>
                 </div>
                 <div className="chat__headerRight">
                     {/* @TODO seperate component for icons */}
