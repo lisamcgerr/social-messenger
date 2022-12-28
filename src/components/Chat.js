@@ -28,8 +28,8 @@ const Chat = () => {
                 setRoomName(docSnap.data().name);
 
                 const docRefRoomMessages = collection(db, 'rooms', roomId, 'messages');
-                //const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc')); @TODO orderBy
-                const docSnapRoomMessages = await getDocs(docRefRoomMessages);
+                const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc')); // @TODO orderBy
+                const docSnapRoomMessages = await getDocs(timestampQuery);
                 console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()}))) // @TODO remove
                 setMessages(docSnapRoomMessages.docs.map(doc => doc.data()));
             };
@@ -46,7 +46,7 @@ const Chat = () => {
         e.preventDefault();
         console.log('Input Variable: ', input); //@TODO remove
         const docRefAddMessage = await addDoc(collection(db, 'rooms', roomId, 'messages'), {
-            message: input,
+            text: input,
             name: user.email,
             timestamp: serverTimestamp()
         });
