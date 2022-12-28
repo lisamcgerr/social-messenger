@@ -17,7 +17,7 @@ const Chat = () => {
     const { roomId } = useParams();
     const [roomName, setRoomName] = useState('');
     const [messages, setMessages] = useState([]);
-    const [{user}] = useStateValue();
+    const [{ user }] = useStateValue();
 
     useEffect(() => {
         const fetchRoom = async (roomId) => {

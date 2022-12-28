@@ -17,11 +17,11 @@ const SidebarChat = ({ name, id }) => {
     useEffect(() => {
         const fetchMessages = async () => {
             if (id) {
-                const docRefRoomMessages = collection(db, 'rooms', roomId, 'messages');
+                const docRefRoomMessages = collection(db, 'rooms', id, 'messages');
                 const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc'));
                 const docSnapRoomMessages = await getDocs(timestampQuery);
                 console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()}))) // @TODO remove
-                setMessages(docSnapRoomMessages.docs.map(doc => doc.data()));    
+                setMessages(docSnapRoomMessages.docs.map(doc => doc.data()));
             }
         };
         fetchMessages();
