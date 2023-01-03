@@ -24,13 +24,11 @@ const Chat = () => {
             if (roomId) {
                 const docRef = doc(db, 'rooms', roomId);
                 const docSnap = await getDoc(docRef);
-                console.log('docSnap Name: ', docSnap.data().name); // @TODO remove
                 setRoomName(docSnap.data().name);
 
                 const docRefRoomMessages = collection(db, 'rooms', roomId, 'messages');
                 const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc'));
                 const docSnapRoomMessages = await getDocs(timestampQuery);
-                console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()}))) // @TODO remove
                 setMessages(docSnapRoomMessages.docs.map(doc => doc.data()));
             };
         };
@@ -44,7 +42,6 @@ const Chat = () => {
 
     const sendMessage = async (e) => {
         e.preventDefault();
-        console.log('Input Variable: ', input); //@TODO remove
         await addDoc(collection(db, 'rooms', roomId, 'messages'), {
             text: input,
             name: user.email,
@@ -60,10 +57,8 @@ const Chat = () => {
                 <div className="chat__headerInfo">
                     <h3>{roomName}</h3>
                     <p>last seen{' '}{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}</p>
-                    {/* @TODO correct when account was created showing invalid date */}
                 </div>
                 <div className="chat__headerRight">
-                    {/* @TODO seperate component for icons */}
                     <IconButton>
                         <DonutLargeIcon />
                     </IconButton>
@@ -76,8 +71,6 @@ const Chat = () => {
                 </div>
             </div>
             <div className="chat__body">
-                {/* @TODO user.displayName or user.email - check google login */}
-                {/* @TODO in prod we can use google id */}
                 {messages.map(message => (
                     <p className={`chat__message ${user.email === message.name && "chat__receiver"}`} key={message.id}>
                     <span className="chat__name">{message.name}</span>

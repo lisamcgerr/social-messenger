@@ -32,7 +32,6 @@ const Sidebar = () => {
             <div className="sidebar__header">
                 <Avatar src={user?.photoURL} alt="Google profile icon"/>
                 <div className="sidebar__headerRight">
-                    {/* @TODO seperate component for icons */}
                     <IconButton>
                         <DonutLargeIcon />
                     </IconButton>

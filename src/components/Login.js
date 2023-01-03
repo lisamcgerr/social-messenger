@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import '../style/Login.css';
 import { Button } from '@material-ui/core';
 import { auth, googleProvider } from './firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { browserSessionPersistence, setPersistence, signInWithPopup } from 'firebase/auth';
 import { useStateValue } from '../contexts/StateProvider';
 import { actionTypes } from '../contexts/reducer';
 import { Link, useHistory } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-
 
 const Login = () => {
   const [{}, dispatch] = useStateValue();
@@ -18,14 +17,14 @@ const Login = () => {
 
   const signIn = async (e) => {
     e.preventDefault();
+    setPersistence(auth, browserSessionPersistence)
     await signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
-      console.log('login result user: ', result.user); // @TODO delete
       dispatch({
           type: actionTypes.SET_USER,
           user: result.user
       });
-      navigate.push('/'); // @TODO redirect navigation?
+      navigate.push('/');
     }).catch((err) => {
         setError(err.message);
     })
@@ -34,7 +33,7 @@ const Login = () => {
   }
 
   const signInWithGoogle = () => {
-    // @TODO persist user after browser refresh
+    setPersistence(auth, browserSessionPersistence)
     signInWithPopup(auth, googleProvider)
     .then((result) => {
       dispatch({
