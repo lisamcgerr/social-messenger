@@ -41,6 +41,7 @@ const Login = () => {
         type: actionTypes.SET_USER,
         user: result.user
       })
+      navigate.push('/');
     }).catch((error) => {
       alert(error.message);
     });
