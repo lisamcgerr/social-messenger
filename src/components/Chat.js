@@ -28,7 +28,7 @@ const Chat = () => {
                 setRoomName(docSnap.data().name);
 
                 const docRefRoomMessages = collection(db, 'rooms', roomId, 'messages');
-                const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc')); // @TODO orderBy
+                const timestampQuery = query(docRefRoomMessages, orderBy('timestamp', 'asc'));
                 const docSnapRoomMessages = await getDocs(timestampQuery);
                 console.log(docSnapRoomMessages.docs.map(doc => ({id: doc.id, ...doc.data()}))) // @TODO remove
                 setMessages(docSnapRoomMessages.docs.map(doc => doc.data()));
@@ -60,6 +60,7 @@ const Chat = () => {
                 <div className="chat__headerInfo">
                     <h3>{roomName}</h3>
                     <p>last seen{' '}{new Date(messages[messages.length -1]?.timestamp?.toDate()).toUTCString()}</p>
+                    {/* @TODO correct when account was created showing invalid date */}
                 </div>
                 <div className="chat__headerRight">
                     {/* @TODO seperate component for icons */}
