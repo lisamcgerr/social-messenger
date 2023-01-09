@@ -1,5 +1,6 @@
+const localStorageUser = JSON.parse(localStorage.getItem('user'));
 export const initialState = {
-    user: null
+    user: localStorageUser
 };
 
 export const actionTypes = {

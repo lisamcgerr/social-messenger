@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../style/Sidebar.css';
 import { Avatar, IconButton } from '@material-ui/core';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { SearchOutlined } from '@material-ui/icons';
@@ -10,6 +9,7 @@ import db from './firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import AddNewChat from './AddNewChat';
 import { useStateValue } from '../contexts/StateProvider';
+import Logout from './Logout';
 
 const Sidebar = () => {
     const [rooms, setRooms] = useState([]);
@@ -33,7 +33,7 @@ const Sidebar = () => {
                 <Avatar src={user?.photoURL} alt="Google profile icon"/>
                 <div className="sidebar__headerRight">
                     <IconButton>
-                        <DonutLargeIcon />
+                        <Logout />
                     </IconButton>
                     <IconButton>
                         <ChatIcon />

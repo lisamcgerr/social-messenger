@@ -24,6 +24,8 @@ const Login = () => {
           type: actionTypes.SET_USER,
           user: result.user
       });
+      localStorage.setItem('user', JSON.stringify(result.user));
+      console.log('Local Storage: ', JSON.parse(localStorage.getItem('user'))); // @TODO remove
       navigate.push('/');
     }).catch((err) => {
         setError(err.message);
@@ -40,6 +42,8 @@ const Login = () => {
         type: actionTypes.SET_USER,
         user: result.user
       })
+      localStorage.setItem('user', JSON.stringify(result.user));
+      console.log('Local Storage: ', JSON.parse(localStorage.getItem('user'))); // @TODO remove
       navigate.push('/');
     }).catch((error) => {
       alert(error.message);
