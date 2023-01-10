@@ -24,7 +24,7 @@ const SidebarChat = ({ name, id }) => {
             }
         };
         fetchMessages();
-    }, [id])
+    }, [])
 
 
     return (

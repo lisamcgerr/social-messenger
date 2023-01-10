@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../style/Sidebar.css';
 import { Avatar, IconButton } from '@material-ui/core';
 import ChatIcon from '@material-ui/icons/Chat';
+import HomeIcon from '@material-ui/icons/Home';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { SearchOutlined } from '@material-ui/icons';
 import SidebarChat from './SidebarChat';
@@ -10,6 +11,8 @@ import { collection, getDocs } from 'firebase/firestore';
 import AddNewChat from './AddNewChat';
 import { useStateValue } from '../contexts/StateProvider';
 import Logout from './Logout';
+import { Link } from 'react-router-dom';
+
 
 const Sidebar = () => {
     const [rooms, setRooms] = useState([]);
@@ -39,7 +42,7 @@ const Sidebar = () => {
                         <ChatIcon />
                     </IconButton>
                     <IconButton>
-                        <MoreVertIcon />
+                        <Link to='/'><HomeIcon /></Link>
                     </IconButton>
                 </div>
             </div>
