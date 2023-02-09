@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import '../style/Login.css';
 import { Button } from '@material-ui/core';
 import { auth, googleProvider } from './firebase';
@@ -15,9 +15,9 @@ const Login = () => {
   const [error, setError] = useState('');
   const navigate = useHistory();
 
-  const signIn = async (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    setPersistence(auth, browserSessionPersistence)
+    await setPersistence(auth, browserSessionPersistence)
     await signInWithEmailAndPassword(auth, email, password)
     .then((result) => {
       dispatch({
@@ -25,7 +25,6 @@ const Login = () => {
           user: result.user
       });
       localStorage.setItem('user', JSON.stringify(result.user));
-      console.log('Local Storage: ', JSON.parse(localStorage.getItem('user'))); // @TODO remove
       navigate.push('/');
     }).catch((err) => {
         setError(err.message);
@@ -34,16 +33,15 @@ const Login = () => {
     setPassword('');
   }
 
-  const signInWithGoogle = () => {
-    setPersistence(auth, browserSessionPersistence)
-    signInWithPopup(auth, googleProvider)
+  const signInWithGoogle = async () => {
+    await setPersistence(auth, browserSessionPersistence)
+    await signInWithPopup(auth, googleProvider)
     .then((result) => {
       dispatch({
         type: actionTypes.SET_USER,
         user: result.user
-      })
+      });
       localStorage.setItem('user', JSON.stringify(result.user));
-      console.log('Local Storage: ', JSON.parse(localStorage.getItem('user'))); // @TODO remove
       navigate.push('/');
     }).catch((error) => {
       alert(error.message);
@@ -72,11 +70,11 @@ const Login = () => {
             onChange={e => setPassword(e.target.value)}
             value={password}
             placeholder="Password" />
-          <Button type="submit" onClick={signIn}>Log In</Button>
+          <Button type="submit" onClick={login}>Sign In</Button>
         </div>
         <Button type="submit" onClick={signInWithGoogle}>
           <img
-            src="https://user-images.githubusercontent.com/73184313/207706566-5902ba79-0b01-4e98-8177-dab5a18c7725.png" 
+            src="https://user-images.githubusercontent.com/73184313/207706566-5902ba79-0b01-4e98-8177-dab5a18c7725.png"
             alt="Google G icon"
             className="login__googleLogo" />
           Sign in with Google
